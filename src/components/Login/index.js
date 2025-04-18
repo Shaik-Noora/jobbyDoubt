@@ -6,7 +6,7 @@ class Login extends Component {
   state = {username: '', password: '', showErrorMsg: true, errorMsg: ''}
 
   renderUserName = () => {
-    const {name} = this.state
+    const {username} = this.state
     return (
       <>
         <label htmlFor="username" className="txt">
@@ -16,7 +16,7 @@ class Login extends Component {
           id="username"
           placeholder="Username"
           type="text"
-          value={name}
+          value={username}
           onChange={this.onChangeUsername}
           className="inp"
         />
@@ -53,6 +53,7 @@ class Login extends Component {
 
   successForm = jwtToken => {
     const {history} = this.props
+    Cookies.set('jwt_token', jwtToken, {expires: 30, path: '/'})
     history.replace('/')
   }
 
@@ -73,7 +74,7 @@ class Login extends Component {
     const data = await response.json()
     console.log(data)
 
-    if (data.ok === true) {
+    if (response.ok === true) {
       this.successForm(data.jwt_token)
     } else {
       this.failureForm(data.error_msg)
