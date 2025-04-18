@@ -4,6 +4,7 @@ import Jobs from './components/Jobs'
 import Header from './components/Header'
 import NotFound from './components/NotFound'
 import Login from './components/Login'
+import ProtectedRoute from './components/ProtectedRoute'
 import './App.css'
 
 // These are the lists used in the application. You can move them to any component needed.
@@ -50,8 +51,8 @@ const App = () => (
   <>
     <Header />
     <Switch>
-      <Route exact path="/" component={Home} />
-      <Route exact path="/jobs" component={Jobs} />
+      <ProtectedRoute exact path="/" component={Home} />
+      <ProtectedRoute exact path="/jobs" component={Jobs} />
       <Route exact path="/login" component={Login} />
       <Route exact path="/Not-Found" component={NotFound} />
       <Redirect to="/Not-Found" />
